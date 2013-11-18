@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.shxt.domain">
+	<class name="User" table="th11_spring_user">
+		<!-- 主键生成策略 -->
+		<id name="id" column="USER_ID" type="integer">
+			<generator class="sequence">
+				<param name="sequence">SEQ_ID</param>
+			</generator>
+		</id>
+		
+		<property name="username" column="USER_NAME" type="string" not-null="true"/>
+		<property name="nickname" column="NICK_NAME" type="string"/>
+		<property name="password" column="PASSWORD" type="string"/>
+		
+		<many-to-one name="group" class="Group" column="group_id"/>
+	</class>
+</hibernate-mapping>

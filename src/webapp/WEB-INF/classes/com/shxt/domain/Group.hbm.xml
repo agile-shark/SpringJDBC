@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.shxt.domain">
+	<class name="Group" table="TH11_SPRING_GROUP">
+		<!-- 主键生成策略 -->
+		<id name="id" column="GROUP_ID" type="integer">
+			<generator class="sequence">
+				<param name="sequence">SEQ_ID</param>
+			</generator>
+		</id>
+		
+		<property name="groupName" column="GROUP_NAME" type="string" not-null="true"/>
+	
+		<set name="userSet" inverse="true">
+			<key column="GROUP_ID"/>
+			<one-to-many class="User"/>
+		</set>
+		
+	</class>
+</hibernate-mapping>
