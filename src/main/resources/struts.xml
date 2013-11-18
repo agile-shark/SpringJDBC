@@ -4,7 +4,7 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-	<!-- 定义后缀名称,do,shxt,html -->
+	<!-- 定义后缀名称,do,html -->
 	<constant name="struts.action.extension" value="action"/>
 	<!-- struts.ui.theme表示层的生成样式 一般情况下就设置成simple  -->
 	<constant name="struts.ui.theme" value="simple"/>
@@ -26,15 +26,12 @@
     	</global-results>
     	<!-- 定义异常处理界面 -->
     	<global-exception-mappings>
-    		<exception-mapping result="exception" exception="com.shxt.exception.THException"></exception-mapping>
+    		<exception-mapping result="exception" exception="com.qunar.fresh.exception.THException"></exception-mapping>
     	</global-exception-mappings>
     	
     	<!-- 配置User访问 -->
     	<action name="*UserAction" class="UserAction" method="{1}">
     		<result name="success">/result.jsp</result>
     	</action>
-    
-    	
 	</package>
-    
 </struts>

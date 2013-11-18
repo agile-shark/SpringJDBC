@@ -32,8 +32,8 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mappingResources">
 			<list>
-				<value>com/shxt/domain/User.hbm.xml</value>
-				<value>com/shxt/domain/Group.hbm.xml</value>
+				<value>com/qunar/fresh/domain/User.hbm.xml</value>
+				<value>com/qunar/fresh/domain/Group.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -50,11 +50,13 @@
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
 	<aop:config>
 		<aop:pointcut id="allMethods"
-			expression="execution(* com.shxt.service.*.*(..))" />
+			expression="execution(* com.qunar.fresh.service.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="allMethods" />
 	</aop:config>
+	
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="*" read-only="true" propagation="REQUIRED" />
@@ -68,35 +70,32 @@
 		</tx:attributes>
 	</tx:advice>
 	
-	<!--<bean id="daoTemplate" abstract="true">
+	<bean id="daoTemplate" abstract="true">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	
-	--><!--<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" >
-		 给JDBCTemplate使用 
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" >
+		<!--  给JDBCTemplate使用  -->
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
-	--><bean id="baseDao" class="com.shxt.dao.BaseDao" >
+	<bean id="baseDao" class="com.qunar.fresh.dao.BaseDao" >
 		<property name="superSessionFactory" ref="sessionFactory"/>
 		<!-- 给HibateanteTemplate使用 -->
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
 	<!-- 配置Dao -->
-	<bean id="userDao" class="com.shxt.dao.UserDaoImpl" parent="baseDao"/>
-	<bean id="groupDao" class="com.shxt.dao.GroupDaoImpl" parent="baseDao"/>
+	<bean id="userDao" class="com.qunar.fresh.dao.UserDaoImpl" parent="baseDao"/>
+	<bean id="groupDao" class="com.qunar.fresh.dao.GroupDaoImpl" parent="baseDao"/>
 
 	<!-- 配置Service -->
-	<bean id="userService" class="com.shxt.service.UserServiceImpl">
+	<bean id="userService" class="com.qunar.fresh.service.UserServiceImpl">
 		<property name="userDao" ref="userDao"/>
 	</bean>
 	
 	<!-- 配置Action-->
-	<bean id="UserAction" class="com.shxt.action.UserAction" scope="prototype">
+	<bean id="UserAction" class="com.qunar.fresh.action.UserAction" scope="prototype">
 		<property name="userService" ref="userService"/>
 	</bean>
-	
-
-
 </beans>
